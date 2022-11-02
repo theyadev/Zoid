@@ -1,0 +1,29 @@
+{
+  "name": "zoid",
+  "version": "1.0.0",
+  "description": "A discord bot for bytezoid discord",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier src/**/* --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bytezoid/Zoid.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bytezoid/Zoid/issues"
+  },
+  "homepage": "https://github.com/Bytezoid/Zoid#readme",
+  "dependencies": {
+    "@types/mongoose": "^5.11.97",
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.7.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
+}

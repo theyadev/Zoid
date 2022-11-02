@@ -1,11 +1,3 @@
 {
-  "Bot": {
-    "TOKEN": "YOUR_TOKEN_HERE",
-    "CLIENT_ID": "YOUR_CLIENT_ID_HERE",
-    "GUILD_ID": "YOUR_GUILD_ID_HERE"
-  },
-
-  "DB": {
-    "URI": "YOUR_MONGODB_URI_HERE"
-  }
+  "verifiedRole": "976692270025826355"
 }

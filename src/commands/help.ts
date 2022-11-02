@@ -16,7 +16,7 @@ export function execute(interaction: CommandInteraction) {
             })
         )
 
-    return interaction.reply({embeds: [helpEmbed]})
+    return interaction.reply({embeds: [helpEmbed], ephemeral: true})
 
 
     

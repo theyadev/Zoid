@@ -1,11 +1,15 @@
 import { Client, GatewayIntentBits, Collection } from "discord.js"
 import { readdirSync } from "fs"
 import { resolve } from "path"
-import { Bot, DB } from "./config.json"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 
 dotenv.config()
+
+if (!process.env.MONGO_URI)
+  throw new Error("MONGO_URI is not defined in the .env file")
+if (!process.env.BOT_TOKEN)
+  throw new Error("BOT_TOKEN is not defined in the .env file")
 
 const TOKEN = process.env.TOKEN
 const MONGO_URI = process.env.MONGO_URI

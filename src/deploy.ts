@@ -1,15 +1,24 @@
 import { REST, Routes } from "discord.js"
-import { Bot, DB } from "./config.json"
 import fs from "fs"
 import { resolve } from "path"
+import dotenv from "dotenv"
 
-const rest = new REST({ version: "9" }).setToken(Bot.TOKEN)
+dotenv.config()
+
+if (!process.env.BOT_TOKEN)
+  throw new Error("BOT_TOKEN is not defined in the .env file")
+if (!process.env.CLIENT_ID)
+  throw new Error("CLIENT_ID is not defined in the .env file")
+if (!process.env.GUILD_ID)
+  throw new Error("GUILD_ID is not defined in the .env file")
+
+const rest = new REST({ version: "9" }).setToken(process.env.BOT_TOKEN)
 
 const commands: string[] = []
 
 // Place your client and guild ids here
-const clientId = Bot.CLIENT_ID
-const guildId = Bot.GUILD_ID
+const clientId = process.env.CLIENT_ID
+const guildId = process.env.GUILD_ID
 
 const commandFiles = fs
   .readdirSync(resolve(__dirname, "commands"))

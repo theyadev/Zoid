@@ -1,8 +1,9 @@
-import { Client, GatewayIntentBits, Collection } from "discord.js"
-import { readdirSync } from "fs"
-import { resolve } from "path"
+import connect from "./db/connect"
 import dotenv from "dotenv"
-import mongoose from "mongoose"
+import getJsFiles from "./utils/getJsFiles"
+
+import { Client, GatewayIntentBits, Collection } from "discord.js"
+import { resolve, join } from "path"
 
 dotenv.config()
 
@@ -23,39 +24,35 @@ declare module "discord.js" {
   }
 }
 
-// Initialize database
-mongoose
-  .connect(MONGO_URI!)
-  .then(() => {
-    console.log("Database initialized.")
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-
-//#region get all command files
+// Create a new collection for the future commands
 client.commands = new Collection()
 
-const commandFiles = readdirSync(resolve(__dirname, "commands")).filter(
-  (file) => file.endsWith(".js")
-)
+// Initialize database
+connect(MONGO_URI)
+
+// #region Folders & Files declaration
+const commandDir = resolve(__dirname, "commands")
+const eventDir = resolve(__dirname, "events")
+
+const commandFiles = getJsFiles(commandDir)
+const eventFiles = getJsFiles(eventDir)
+// #endregion
+
+// #region Handle commands
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`)
+  const command = require(join(commandDir, file))
   client.commands.set(command.data.name, command)
 }
 // #endregion
 
-//#region event handler
-const eventFiles = readdirSync(resolve(__dirname, "events")).filter((file) =>
-  file.endsWith(".js")
-)
+// #region Handle events
 for (const file of eventFiles) {
-  const event = require(`./events/${file}`)
-  if (event.once) {
-    client.once(event.name, (...args) => event.execute(...args))
-  } else {
-    client.on(event.name, (...args) => event.execute(...args))
-  }
+  const event = require(join(eventDir, file))
+
+  // set the handler to the "once" function if the event is a once event
+  const handler = event.once ? "once" : "on"
+
+  client[handler](event.name, (...args) => event.execute(...args))
 }
 // #endregion
 

@@ -1,7 +1,7 @@
 import { REST, Routes } from "discord.js"
-import fs from "fs"
-import { resolve } from "path"
+import { resolve, join } from "path"
 import dotenv from "dotenv"
+import getJsFiles from "./utils/getJsFiles"
 
 dotenv.config()
 
@@ -20,12 +20,11 @@ const commands: string[] = []
 const clientId = process.env.CLIENT_ID
 const guildId = process.env.GUILD_ID
 
-const commandFiles = fs
-  .readdirSync(resolve(__dirname, "commands"))
-  .filter((file) => file.endsWith(".js"))
+const commandDir = resolve(__dirname, "commands")
+const commandFiles = getJsFiles(commandDir)
 
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`)
+  const command = require(join(commandDir, file))
   commands.push(command.data.toJSON())
 }
 

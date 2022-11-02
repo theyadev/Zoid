@@ -7,6 +7,7 @@ export const data = new SlashCommandBuilder()
   .setDescription("Responds with infromation about the discord bot")
 
 export function execute(interaction: CommandInteraction) {
+  console.log(`User ${interaction.user.username} has used the botinfo command`)
   const botinfo = new EmbedBuilder()
     .setTitle("Bot Info")
     .setDescription("information about the bot")

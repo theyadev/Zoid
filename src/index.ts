@@ -1,7 +1,6 @@
 import { Client, GatewayIntentBits, Collection } from "discord.js"
 import { readdirSync } from "fs"
 import { resolve } from "path"
-import { Bot, DB } from "./config.json"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 
@@ -9,6 +8,10 @@ dotenv.config()
 
 const TOKEN = process.env.TOKEN
 const MONGO_URI = process.env.MONGO_URI
+
+// throw an error if the token  or URI is not defined
+if (!TOKEN) throw new Error("TOKEN is not defined")
+if (!MONGO_URI) throw new Error("MONGO_URI is not defined")
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds],

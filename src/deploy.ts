@@ -1,15 +1,15 @@
 import { REST, Routes}  from 'discord.js';
-import config  from './config.json';
+import { Bot, DB}  from './config.json';
 import fs from 'fs';
 import { resolve } from 'path'; 
 
-const rest = new REST({ version: '9' }).setToken(config.TOKEN);
+const rest = new REST({ version: '9' }).setToken(Bot.TOKEN);
 
 const commands:string[] = [];
 
 // Place your client and guild ids here
-const clientId = config.CLIENT_ID;
-const guildId = config.GUILD_ID;
+const clientId = Bot.CLIENT_ID;
+const guildId = Bot.GUILD_ID;
 
 const commandFiles = fs.readdirSync(resolve(__dirname, 'commands')).filter(file => file.endsWith('.js'));
 

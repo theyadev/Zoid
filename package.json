@@ -1,0 +1,22 @@
+{
+  "name": "zoid",
+  "version": "1.0.0",
+  "description": "A discord bot for bytezoid discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bytezoid/Zoid.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bytezoid/Zoid/issues"
+  },
+  "homepage": "https://github.com/Bytezoid/Zoid#readme",
+  "dependencies": {
+    "discord.js": "^14.6.0"
+  }
+}

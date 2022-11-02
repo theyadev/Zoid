@@ -1,8 +1,14 @@
 import { Client, GatewayIntentBits, Collection, } from 'discord.js';
-import { MongoClient } from 'mongodb';
 import  { readdirSync} from 'fs'; 
 import { resolve } from 'path'; 
 import { Bot, DB} from './config.json';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+
+dotenv.config();
+
+const TOKEN = process.env.TOKEN;
+const MONGO_URI = process.env.MONGO_URI;
 
 const client = new Client({
     intents: [
@@ -16,8 +22,13 @@ declare module 'discord.js' {
     }
 }
 
-//create DB client
-const dbClient = new MongoClient(DB.URI);
+// Initialize database
+mongoose.connect(MONGO_URI!).then(() => {
+    console.log("Database initialized.");
+}).catch((error) => {
+    console.log(error);
+});
+
 
 //#region get all command files
 client.commands = new Collection();
@@ -42,6 +53,4 @@ for (const file of eventFiles) {
 }
 // #endregion
 
-client.login(Bot.TOKEN);
-
-export { dbClient };
+client.login(TOKEN);

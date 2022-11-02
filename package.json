@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Bytezoid/Zoid#readme",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "discord.js": "^14.6.0",
-    "mongodb": "^4.11.0"
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.7.0"
   }
 }

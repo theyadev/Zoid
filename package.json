@@ -4,6 +4,7 @@
   "description": "A discord bot for bytezoid discord",
   "main": "index.js",
   "scripts": {
+    "format": "prettier src/**/* --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "dependencies": {
     "discord.js": "^14.6.0",
     "mongodb": "^4.11.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
   }
 }

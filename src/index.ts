@@ -11,7 +11,7 @@ if (!process.env.MONGO_URI)
 if (!process.env.BOT_TOKEN)
   throw new Error("BOT_TOKEN is not defined in the .env file")
 
-const TOKEN = process.env.TOKEN
+const TOKEN = process.env.BOT_TOKEN
 const MONGO_URI = process.env.MONGO_URI
 
 const client = new Client({

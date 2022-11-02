@@ -5,11 +5,14 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-if (!process.env.TOKEN) throw new Error("TOKEN is not defined")
-if (!process.env.CLIENT_ID) throw new Error("CLIENT_ID is not defined")
-if (!process.env.GUILD_ID) throw new Error("GUILD_ID is not defined")
+if (!process.env.BOT_TOKEN)
+  throw new Error("BOT_TOKEN is not defined in the .env file")
+if (!process.env.CLIENT_ID)
+  throw new Error("CLIENT_ID is not defined in the .env file")
+if (!process.env.GUILD_ID)
+  throw new Error("GUILD_ID is not defined in the .env file")
 
-const rest = new REST({ version: "9" }).setToken(process.env.TOKEN)
+const rest = new REST({ version: "9" }).setToken(process.env.BOT_TOKEN)
 
 const commands: string[] = []
 

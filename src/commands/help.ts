@@ -5,6 +5,8 @@ export const data = new SlashCommandBuilder()
   .setName("help")
   .setDescription("Responds with a list of commands")
 export function execute(interaction: CommandInteraction) {
+  console.log(`User ${interaction.user.username} has used the help command`)
+
   const helpEmbed = new EmbedBuilder()
     .setTitle("help menu")
     .setDescription("This is a list of commands")

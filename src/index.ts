@@ -7,7 +7,12 @@ import { resolve, join } from "path"
 
 dotenv.config()
 
-const TOKEN = process.env.TOKEN
+if (!process.env.MONGO_URI)
+  throw new Error("MONGO_URI is not defined in the .env file")
+if (!process.env.BOT_TOKEN)
+  throw new Error("BOT_TOKEN is not defined in the .env file")
+
+const TOKEN = process.env.BOT_TOKEN
 const MONGO_URI = process.env.MONGO_URI
 
 // throw an error if the token  or URI is not defined

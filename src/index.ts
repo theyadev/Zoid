@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Client, GatewayIntentBits, Collection, } from 'discord.js';
 import  { readdirSync} from 'fs'; 
 import { resolve } from 'path'; 
@@ -9,19 +10,25 @@ dotenv.config();
 
 const TOKEN = process.env.TOKEN;
 const MONGO_URI = process.env.MONGO_URI;
+=======
+import { Client, GatewayIntentBits, Collection } from "discord.js"
+import { MongoClient } from "mongodb"
+import { readdirSync } from "fs"
+import { resolve } from "path"
+import { Bot, DB } from "./config.json"
+>>>>>>> 1f866f868f488123d64c9a59a7fbb4fd87a787cd
 
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds
-    ]
-});
+  intents: [GatewayIntentBits.Guilds],
+})
 
-declare module 'discord.js' {
-    interface Client {
-        commands: Collection<unknown, any>;
-    }
+declare module "discord.js" {
+  interface Client {
+    commands: Collection<unknown, any>
+  }
 }
 
+<<<<<<< HEAD
 // Initialize database
 mongoose.connect(MONGO_URI!).then(() => {
     console.log("Database initialized.");
@@ -29,28 +36,41 @@ mongoose.connect(MONGO_URI!).then(() => {
     console.log(error);
 });
 
+=======
+//create DB client
+const dbClient = new MongoClient(DB.URI)
+>>>>>>> 1f866f868f488123d64c9a59a7fbb4fd87a787cd
 
 //#region get all command files
-client.commands = new Collection();
+client.commands = new Collection()
 
-const commandFiles = readdirSync(resolve(__dirname, 'commands')).filter(file => file.endsWith('.js')); 
+const commandFiles = readdirSync(resolve(__dirname, "commands")).filter(
+  (file) => file.endsWith(".js")
+)
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.data.name, command);
+  const command = require(`./commands/${file}`)
+  client.commands.set(command.data.name, command)
 }
 // #endregion
-
 
 //#region event handler
-const eventFiles = readdirSync(resolve(__dirname, 'events')).filter(file => file.endsWith('.js'));
+const eventFiles = readdirSync(resolve(__dirname, "events")).filter((file) =>
+  file.endsWith(".js")
+)
 for (const file of eventFiles) {
-    const event = require(`./events/${file}`);
-    if (event.once) {
-        client.once(event.name, (...args) => event.execute(...args));
-    } else {
-        client.on(event.name, (...args) => event.execute(...args));
-    }
+  const event = require(`./events/${file}`)
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args))
+  } else {
+    client.on(event.name, (...args) => event.execute(...args))
+  }
 }
 // #endregion
 
+<<<<<<< HEAD
 client.login(TOKEN);
+=======
+client.login(Bot.TOKEN)
+
+export { dbClient }
+>>>>>>> 1f866f868f488123d64c9a59a7fbb4fd87a787cd
